@@ -1,0 +1,15 @@
+---
+- name: VM Provisoning
+  hosts: all
+  tasks:
+  - name: Install Basic Packages
+    become: yes
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - screen
+      - wget
+      - curl
+      - telnet
+      - net-tools
