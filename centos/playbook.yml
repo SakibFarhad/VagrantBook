@@ -2,10 +2,17 @@
 - name: VM Provisoning
   hosts: all
   tasks:
+
+  - name: Upgrade all Packages
+    yum:
+      name: '*'
+      state: latest
+
   - name: Install Basic Packages
     become: yes
     yum:
       name: "{{ packages }}"
+      state: present
     vars:
       packages:
       - screen
@@ -13,3 +20,16 @@
       - curl
       - telnet
       - net-tools
+      - java-1.8.0-openjdk-devel
+
+  - name: Add all hosts to /etc/hosts # using nat bridgr here
+    become: yes
+    lineinfile:
+      dest: /etc/hosts
+      regexp: '.*{{ item }}$'
+      line: "{{ hostvars[item].ansible_host }} {{item}}"
+      state: present
+    when: hostvars[item].ansible_host is defined
+    with_items: "{{ groups.all }}"
+      
+      
