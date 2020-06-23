@@ -2,12 +2,7 @@
 - name: VM Provisoning
   hosts: all
   tasks:
-
-  - name: Upgrade all Packages
-    yum:
-      name: '*'
-      state: latest
-
+  
   - name: Install Basic Packages
     become: yes
     yum:
