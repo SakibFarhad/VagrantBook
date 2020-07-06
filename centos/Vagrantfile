@@ -2,6 +2,9 @@
 
 # Number of vms I need
 vm_node = 3 
+host_adapter = "192.168.56."
+host_adapter_starts = 110
+host_adapter_gateway = "192.168.56.1"
 
 Vagrant.configure("2") do |config|
     config.vm.box_check_update = false
@@ -13,11 +16,13 @@ Vagrant.configure("2") do |config|
     
     (1..vm_node).each do |i|
         config.vm.define "vm-#{i}" do |node| 
-            node.vm.provider "libvirt" do |vb|
+            node.vm.provider "virtualbox" do |vb|
+                vb.name = "vm-#{i}"
                 vb.memory = 2048
                 vb.cpus = 2            
             end
             node.vm.hostname = "vm-#{i}"
+            node.vm.network :private_network, ip: host_adapter + "#{host_adapter_starts + i}", gateway: host_adapter_gateway
         end
     end
 end
