@@ -16,6 +16,7 @@
       - telnet
       - net-tools
       - java-1.8.0-openjdk-devel
+      - epel-release
 
   - name: Add all hosts to /etc/hosts # using nat bridgr here
     become: yes
