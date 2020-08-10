@@ -3,7 +3,7 @@
   become: true
   hosts: all
   tasks:
-  
+
   - name: Install Basic Packages
     yum:
       name: "{{ packages }}"
@@ -15,7 +15,9 @@
       - curl
       - telnet
       - net-tools
-      - ntp
+      - vim
+      - ntp*
+      - unzip
       - java-1.8.0-openjdk-devel
 
   - name: Disable firewalld
@@ -24,6 +26,10 @@
       state: stopped
       enabled: no
 
+  - name: Set timezone to Asia/Dhaka
+    timezone:
+      name: Asia/Dhaka
+
   - name: Enable ntp
     systemd:
       name: ntpd
@@ -31,7 +37,7 @@
       enabled: yes
 
 
-  - name: Add all hosts to /etc/hosts # using nat bridgr here
+  - name: Add all hosts to /etc/hosts
     lineinfile:
       dest: /etc/hosts
       regexp: '.*{{ item }}$'
@@ -39,5 +45,5 @@
       state: present
     when: hostvars[item].ansible_host is defined
     with_items: "{{ groups.all }}"
-      
-      
+
+
