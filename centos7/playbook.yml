@@ -16,7 +16,9 @@
       - curl
       - telnet
       - net-tools
-      - ntp
+      - vim
+      - ntp*
+      - unzip
       - java-1.8.0-openjdk-devel
       - epel-release
 
@@ -27,6 +29,10 @@
       enabled: no
       masked: yes
 
+  - name: Set timezone to Asia/Dhaka
+    timezone:
+      name: Asia/Dhaka
+
   - name: Enable ntp
     systemd:
       name: ntpd
@@ -34,7 +40,7 @@
       enabled: yes
 
 
-  - name: Add all hosts to /etc/hosts # using nat bridgr here
+  - name: Add all hosts to /etc/hosts
     lineinfile:
       dest: /etc/hosts
       regexp: '.*{{ item }}$'
