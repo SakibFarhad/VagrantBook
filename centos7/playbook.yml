@@ -1,9 +1,10 @@
 ---
 - name: VM Provisoning
-  become: true
+  gather_facts: no
+  become: yes
   hosts: all
   tasks:
-  
+
   - name: Install Basic Packages
     yum:
       name: "{{ packages }}"
@@ -24,6 +25,7 @@
       name: firewalld
       state: stopped
       enabled: no
+      masked: yes
 
   - name: Enable ntp
     systemd:
@@ -40,5 +42,5 @@
       state: present
     when: hostvars[item].ansible_host is defined
     with_items: "{{ groups.all }}"
-      
-      
+
+
