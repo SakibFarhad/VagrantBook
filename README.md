@@ -1,13 +1,15 @@
 # VagrantBook
 
-This is my VM automation book. I use `vagrant` with `libvirt` or `kvm/qemu` provider
+This is my VM automation book. I use `vagrant` on `libvirt` with `kvm/qemu` provider
 
 For provisoning I use ansible. It is like a magic. 
 
-currently I have two setup:
+currently I have following setup:
 
-1. [centos](centos/)  
-1. [ubuntu](ubuntu/)
+1. [CentOS 7](centos7/)  
+2. [ubuntu](ubuntu/)
+3. [debian 10](debian/)
+4. [kubernetes](k8s/)
 
 I just copy paste to create new kind of vms. cheers!!
 
