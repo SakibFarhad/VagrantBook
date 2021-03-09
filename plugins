@@ -1,3 +1,1 @@
-vagrant-libvirt
-vagrant-mutate
-vagrant-scp
+vagrant-libvirt vagrant-mutate vagrant-scp

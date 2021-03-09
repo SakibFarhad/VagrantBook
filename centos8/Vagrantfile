@@ -1,5 +1,5 @@
 # Number of vms I need
-vm_node = 1
+vm_node = 3
 
 Vagrant.configure("2") do |config|
     config.vm.box_check_update = false
