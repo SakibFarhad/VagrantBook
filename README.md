@@ -7,9 +7,10 @@ For provisoning I use ansible. It is like a magic.
 currently I have following setup:
 
 1. [CentOS 7](centos7/)  
-2. [ubuntu](ubuntu/)
-3. [debian 10](debian/)
-4. [kubernetes](k8s/)
+2. [ubuntu 20.04](ubuntu/)
+3. [debian 11](debian/)
+4. [CentOS 6](centos6/)
+5. [CentOS 8](centos8/)
 
 I just copy paste to create new kind of vms. cheers!!
 
@@ -19,7 +20,7 @@ Follow followling steps:
 
 ```bash
 # Install packages
-sudo pacman -S vagrant libvirt qemu base-devel ansible
+sudo pacman -S vagrant libvirt qemu-base base-devel bridge-utils openbsd-netcat ebtables iptables libguestfs
 
 # enable libvirt systemd service
 sudo systemctl enable --now libvirtd
