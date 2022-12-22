@@ -1,22 +1,14 @@
-ENV['VAGRANT_NO_PARALLEL'] = 'yes'
-
 # Number of vms I need
 vm_node = 2
-
-if Vagrant.has_plugin?("vagrant-timezone")
-    config.timezone.value = :host
-end
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 
 Vagrant.configure("2") do |config|
+    config.timezone.value = :host
     config.vm.box_check_update = false
     config.vm.box = "generic/centos7"
     config.vm.provision "shell", path: "bootstrap.sh"
 
-    if Vagrant.has_plugin?("vagrant-timezone")
-      config.timezone.value = :host
-    end
-
-
+    
     (1..vm_node).each do |i|
         config.vm.define "vm-#{i}" do |node|
             node.vm.provider "libvirt" do |vb|

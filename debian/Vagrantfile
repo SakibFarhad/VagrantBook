@@ -1,15 +1,13 @@
-ENV['VAGRANT_NO_PARALLEL'] = 'yes'
-
 # Variables
 vm_node = 1
 
-if Vagrant.has_plugin?("vagrant-timezone")
-    config.timezone.value = :host
-end
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'
+
 
 Vagrant.configure("2") do |config|
+    
     config.vm.box_check_update = false
-
+    config.timezone.value = :host
     config.vm.box = "generic/debian11"
     config.vm.provision "shell", path: "bootstrap.sh"
 

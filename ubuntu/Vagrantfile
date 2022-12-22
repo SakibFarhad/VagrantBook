@@ -2,13 +2,10 @@
 vm_node = 1
 ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 
-if Vagrant.has_plugin?("vagrant-timezone")
-    config.timezone.value = :host
-end
-
 Vagrant.configure("2") do |config|
+    
+    config.timezone.value = :host
     config.vm.box_check_update = false
-
     config.vm.box = "generic/ubuntu2204"
     config.vm.provision "shell", path: "bootstrap.sh"
 
