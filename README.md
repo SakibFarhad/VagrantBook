@@ -6,11 +6,12 @@ For provisoning I use ansible. It is like a magic.
 
 currently I have following setup:
 
-1. [CentOS 7](centos7/)  
-2. [ubuntu 20.04](ubuntu/)
-3. [debian 11](debian/)
-4. [CentOS 6](centos6/)
+1. [ubuntu 22.04](ubuntu/)
+2. [debian 11](debian/)
+3. [CentOS 6](centos6/)
+4. [CentOS 7](centos7/)  
 5. [CentOS 8](centos8/)
+6. [Rocky Linux 8](rocky-linux-9/)
 
 I just copy paste to create new kind of vms. cheers!!
 
