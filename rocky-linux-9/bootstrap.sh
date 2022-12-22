@@ -4,4 +4,4 @@
 echo "[TASK 1] Enable ssh password authentication"
 sed -i 's/^PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
 echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
-service sshd restart
+systemctl reload sshd
