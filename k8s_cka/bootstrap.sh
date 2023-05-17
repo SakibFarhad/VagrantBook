@@ -7,6 +7,7 @@ echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 systemctl reload sshd
 
 # Update System
+echo "[TASK 2] Install required packages and update the system"
 sudo apt update
 sudo apt purge --autoremove snapd nano -y
 sudo apt install -y vim tmux jq htop curl socat conntrack
