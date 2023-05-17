@@ -9,5 +9,5 @@ systemctl reload sshd
 # Update System
 sudo apt update
 sudo apt purge --autoremove snapd nano -y
-sudo apt install -y vim tmux jq htop curl
+sudo apt install -y vim tmux jq htop curl socat conntrack
 sudo apt upgrade -y --autoremove
