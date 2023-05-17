@@ -1,23 +1,21 @@
 # Variables
-vm_node = 1
-
+vm_node = 3
 ENV['VAGRANT_NO_PARALLEL'] = 'yes'
-
 
 Vagrant.configure("2") do |config|
     
-    config.vm.box_check_update = false
     config.timezone.value = :host
-    config.vm.box = "generic/debian11"
+    config.vm.box_check_update = false
+    config.vm.box = "generic/ubuntu2004"
     config.vm.provision "shell", path: "bootstrap.sh"
 
     (1..vm_node).each do |i|
-        config.vm.define "vm-#{i}" do |node|
+        config.vm.define "cka-#{i}" do |node|
             node.vm.provider "libvirt" do |vb|
-                vb.memory = 8196
-                vb.cpus = 4
+                vb.memory = 4096
+                vb.cpus = 2
             end
-            node.vm.hostname = "debian11-#{i}"
+            node.vm.hostname = "cka-#{i}"
         end
     end
 end
