@@ -8,7 +8,9 @@ systemctl reload sshd
 
 # Update System
 echo "[TASK 2] Install required packages and update the system"
-sudo apt update
-sudo apt purge --autoremove snapd nano -y
-sudo apt install -y vim tmux jq htop curl socat conntrack
-sudo apt upgrade -y --autoremove
+sudo apt-get update
+sudo apt-get purge --autoremove snapd nano -y
+sudo apt-get install -y vim tmux jq htop \
+	curl socat conntrack net-tools dnsutils
+sudo apt-get upgrade -y --autoremove
+sudo apt-get clean 
