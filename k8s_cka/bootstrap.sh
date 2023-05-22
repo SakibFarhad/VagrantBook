@@ -14,3 +14,8 @@ sudo apt-get install -y vim tmux jq htop \
 	curl socat conntrack net-tools dnsutils
 sudo apt-get upgrade -y --autoremove
 sudo apt-get clean 
+
+# Turn off Swap
+echo "[TASK 3] Turn off swap"
+sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
