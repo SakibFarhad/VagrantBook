@@ -1,21 +1,38 @@
-# Variables
-vm_node = 5
+# Variables (can be overridden via environment)
+master_node = ENV.fetch("MASTER_NODE", "1").to_i
+worker_node = ENV.fetch("WORKER_NODE", "3").to_i
+box_name = ENV.fetch("VAGRANT_BOX", "generic/debian12")
 ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 
 Vagrant.configure("2") do |config|
-    
-    config.timezone.value = :host
+    # Common settings
     config.vm.box_check_update = false
-    config.vm.box = "generic/debian12"
-    config.vm.provision "shell", path: "bootstrap.sh"
+    config.vm.box = box_name
 
-    (1..vm_node).each do |i|
-        config.vm.define "cka-#{i}" do |node|
+    # Optional timezone plugin guard
+    if config.respond_to?(:timezone) && config.timezone.respond_to?(:value=)
+        config.timezone.value = :host
+    end
+
+    (1..master_node).each do |i|
+        config.vm.define "master-#{i}" do |node|
             node.vm.provider "libvirt" do |vb|
-                vb.memory = 4 * 1024
+                vb.memory = 2 * 1024
+                vb.cpus = 2
+            end
+            node.vm.hostname = "master-#{i}"
+            node.vm.provision "shell", path: "bootstrap.sh"
+        end
+    end
+
+    (1..worker_node).each do |i|
+        config.vm.define "worker-#{i}" do |node|
+            node.vm.provider "libvirt" do |vb|
+                vb.memory = 8 * 1024
                 vb.cpus = 4
             end
-            node.vm.hostname = "cka-#{i}"
+            node.vm.hostname = "worker-#{i}"
+            node.vm.provision "shell", path: "bootstrap.sh"
         end
     end
 end
