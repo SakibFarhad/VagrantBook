@@ -10,9 +10,11 @@ systemctl reload sshd
 echo "[TASK 2] Install required packages and update the system on $HOSTNAME"
 sudo apt update
 sudo apt install -y vim tmux jq htop build-essential apt-transport-https ca-certificates gpg \
-					curl socat conntrack net-tools dnsutils wget nano-
+					curl socat conntrack net-tools dnsutils wget nano- ebtables ethtool ntp
 # sudo apt upgrade -y --autoremove
 sudo apt-get clean 
+sudo timedatectl set-ntp true
+sudo timedatectl set-timezone Asia/Dhaka
 
 # Turn off Swap
 echo "[TASK 3] Turn off swap on $HOSTNAME"

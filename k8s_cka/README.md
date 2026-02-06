@@ -7,9 +7,10 @@ After running `vagrant up` we need to run following command
 ### Initialize control-pane
 
 ```bash
-CIDR=10.110.0.0/16
 sudo kubeadm config images pull
-sudo kubeadm init --pod-network-cidr=$CIDR --apiserver-advertise-address=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1}) \   --node-name $HOSTNAME
+
+CIDR=10.110.0.0/16
+sudo kubeadm init --pod-network-cidr=$CIDR --apiserver-advertise-address=$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1}) --node-name $HOSTNAME
 ```
 
 ### In case of mistake  
@@ -30,7 +31,6 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ```bash
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/tigera-operator.yaml
-curl https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/custom-resources.yaml -O
 # Edit the yaml file set $CIDR value
 kubectl apply -f custom-resources.yaml
 ```
@@ -46,5 +46,11 @@ sudo kubeadm join 172.31.71.210:6443 --token xxxxx --discovery-token-ca-cert-has
 
 ```bash
 kubeadm token create --print-join-command
+```
+
+## Install `metrics-server`
+
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 
